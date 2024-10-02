@@ -3,8 +3,8 @@
   "WorkspaceRootPath": "C:\\Users\\melis\\source\\repos\\BloggingPlatformAPI\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\melis\\source\\repos\\BloggingPlatformAPI\\BloggingPlatformAPI\\Migrations\\20240930020838_InitialCreate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:BloggingPlatformAPI\\Migrations\\20240930020838_InitialCreate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{25D20155-630F-4A8D-93D7-363C25F4D913}|BloggingPlatformAPI\\BloggingPlatformAPI.csproj|c:\\users\\melis\\source\\repos\\bloggingplatformapi\\bloggingplatformapi\\validators\\bloginsertvalidator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{25D20155-630F-4A8D-93D7-363C25F4D913}|BloggingPlatformAPI\\BloggingPlatformAPI.csproj|solutionrelative:bloggingplatformapi\\validators\\bloginsertvalidator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{25D20155-630F-4A8D-93D7-363C25F4D913}|BloggingPlatformAPI\\BloggingPlatformAPI.csproj|c:\\users\\melis\\source\\repos\\bloggingplatformapi\\bloggingplatformapi\\repository\\blogrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -13,6 +13,10 @@
     {
       "AbsoluteMoniker": "D:0:0:{25D20155-630F-4A8D-93D7-363C25F4D913}|BloggingPlatformAPI\\BloggingPlatformAPI.csproj|c:\\users\\melis\\source\\repos\\bloggingplatformapi\\bloggingplatformapi\\models\\blogcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{25D20155-630F-4A8D-93D7-363C25F4D913}|BloggingPlatformAPI\\BloggingPlatformAPI.csproj|solutionrelative:bloggingplatformapi\\models\\blogcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{25D20155-630F-4A8D-93D7-363C25F4D913}|BloggingPlatformAPI\\BloggingPlatformAPI.csproj|c:\\users\\melis\\source\\repos\\bloggingplatformapi\\bloggingplatformapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{25D20155-630F-4A8D-93D7-363C25F4D913}|BloggingPlatformAPI\\BloggingPlatformAPI.csproj|solutionrelative:bloggingplatformapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{25D20155-630F-4A8D-93D7-363C25F4D913}|BloggingPlatformAPI\\BloggingPlatformAPI.csproj|c:\\users\\melis\\source\\repos\\bloggingplatformapi\\bloggingplatformapi\\repository\\irepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -31,15 +35,27 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "20240930020838_InitialCreate.cs",
-              "DocumentMoniker": "C:\\Users\\melis\\source\\repos\\BloggingPlatformAPI\\BloggingPlatformAPI\\Migrations\\20240930020838_InitialCreate.cs",
-              "RelativeDocumentMoniker": "BloggingPlatformAPI\\Migrations\\20240930020838_InitialCreate.cs",
-              "ToolTip": "C:\\Users\\melis\\source\\repos\\BloggingPlatformAPI\\BloggingPlatformAPI\\Migrations\\20240930020838_InitialCreate.cs",
-              "RelativeToolTip": "BloggingPlatformAPI\\Migrations\\20240930020838_InitialCreate.cs",
-              "ViewState": "AQIAAAYAAAAAAAAAAAAAABQAAABaAAAA",
+              "Title": "BlogInsertValidator.cs",
+              "DocumentMoniker": "C:\\Users\\melis\\source\\repos\\BloggingPlatformAPI\\BloggingPlatformAPI\\Validators\\BlogInsertValidator.cs",
+              "RelativeDocumentMoniker": "BloggingPlatformAPI\\Validators\\BlogInsertValidator.cs",
+              "ToolTip": "C:\\Users\\melis\\source\\repos\\BloggingPlatformAPI\\BloggingPlatformAPI\\Validators\\BlogInsertValidator.cs",
+              "RelativeToolTip": "BloggingPlatformAPI\\Validators\\BlogInsertValidator.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAABcAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-30T02:08:38.308Z",
+              "WhenOpened": "2024-09-30T07:37:16.052Z",
               "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\melis\\source\\repos\\BloggingPlatformAPI\\BloggingPlatformAPI\\appsettings.json",
+              "RelativeDocumentMoniker": "BloggingPlatformAPI\\appsettings.json",
+              "ToolTip": "C:\\Users\\melis\\source\\repos\\BloggingPlatformAPI\\BloggingPlatformAPI\\appsettings.json",
+              "RelativeToolTip": "BloggingPlatformAPI\\appsettings.json",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-09-30T02:42:00.168Z"
             },
             {
               "$type": "Document",
@@ -51,8 +67,7 @@
               "RelativeToolTip": "BloggingPlatformAPI\\Models\\BlogContext.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAAuAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-30T01:31:07.073Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-30T01:31:07.073Z"
             },
             {
               "$type": "Document",
@@ -62,14 +77,14 @@
               "RelativeDocumentMoniker": "BloggingPlatformAPI\\Repository\\BlogRepository.cs",
               "ToolTip": "C:\\Users\\melis\\source\\repos\\BloggingPlatformAPI\\BloggingPlatformAPI\\Repository\\BlogRepository.cs",
               "RelativeToolTip": "BloggingPlatformAPI\\Repository\\BlogRepository.cs",
-              "ViewState": "AQIAABUAAAAAAAAAAAAwwB4AAAAJAAAA",
+              "ViewState": "AQIAAAQAAAAAAAAAAAAAAB4AAAAJAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-09-30T01:27:26.596Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "IRepository.cs",
               "DocumentMoniker": "C:\\Users\\melis\\source\\repos\\BloggingPlatformAPI\\BloggingPlatformAPI\\Repository\\IRepository.cs",
               "RelativeDocumentMoniker": "BloggingPlatformAPI\\Repository\\IRepository.cs",
@@ -77,8 +92,7 @@
               "RelativeToolTip": "BloggingPlatformAPI\\Repository\\IRepository.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAUAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-30T00:46:31.439Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-30T00:46:31.439Z"
             }
           ]
         }
