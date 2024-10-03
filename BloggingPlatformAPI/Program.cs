@@ -23,7 +23,7 @@ builder.Services.AddDbContext<BlogContext>(options =>
 
 // Validators
 builder.Services.AddScoped<IValidator<BlogInsertDTO>, BlogInsertValidator>();
-builder.Services.AddScoped<IValidator<BlogUpdateDTO>, BlogUpdatevValidator>();
+builder.Services.AddScoped<IValidator<BlogUpdateDTO>, BlogUpdateValidator>();
 
 // Automappers
 builder.Services.AddAutoMapper(typeof(MappingProfile));

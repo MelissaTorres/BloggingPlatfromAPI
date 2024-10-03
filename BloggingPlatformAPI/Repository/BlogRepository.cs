@@ -43,6 +43,6 @@ namespace BloggingPlatformAPI.Repository
             await _context.SaveChangesAsync();
         }
 
-        IEnumerable<Blog> Search(Func<Blog, bool> filter) => _context.Blogs.Where(filter).ToList();
+        IEnumerable<Blog> IRepository<Blog>.Search(Func<Blog, bool> filter) => _context.Blogs.Where(filter).ToList();
     }
 }

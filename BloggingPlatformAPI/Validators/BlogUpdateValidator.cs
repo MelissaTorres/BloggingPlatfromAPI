@@ -4,11 +4,11 @@ using System.Collections.Immutable;
 
 namespace BloggingPlatformAPI.Validators
 {
-    public class BlogUpdatevValidator : AbstractValidator<BlogUpdateDTO>
+    public class BlogUpdateValidator : AbstractValidator<BlogUpdateDTO>
     {
-        public BlogUpdatevValidator() 
+        public BlogUpdateValidator() 
         {
-            RuleFor(x => x.Id).NotNull().WithMessage("Id can't be null or empty.")
+            RuleFor(x => x.Id).NotNull().WithMessage("Id can't be null or empty.");
             RuleFor(x => x.Title).NotEmpty().WithMessage("Title must have a value");
             RuleFor(x => x.Title).Length(5, 50).WithMessage("Title length must be between 5 and 50.");
             RuleFor(x => x.Content).MinimumLength(10).WithMessage("Content must have a minimum length of 10.");
