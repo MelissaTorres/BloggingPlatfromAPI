@@ -8,7 +8,6 @@ namespace BloggingPlatformAPI.Validators
     {
         public BlogUpdateValidator() 
         {
-            RuleFor(x => x.Id).NotNull().WithMessage("Id can't be null or empty.");
             RuleFor(x => x.Title).NotEmpty().WithMessage("Title must have a value");
             RuleFor(x => x.Title).Length(5, 50).WithMessage("Title length must be between 5 and 50.");
             RuleFor(x => x.Content).MinimumLength(10).WithMessage("Content must have a minimum length of 10.");

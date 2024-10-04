@@ -3,6 +3,7 @@ using BloggingPlatformAPI.DTOs;
 using BloggingPlatformAPI.Repository;
 using AutoMapper;
 using Microsoft.OpenApi.Validations;
+using System.Text.Json;
 
 namespace BloggingPlatformAPI.Services
 {
@@ -48,8 +49,23 @@ namespace BloggingPlatformAPI.Services
 
         public async Task<BlogDTO> Add(BlogInsertDTO blogInsertDTO)
         {
-            // convert blogInsertDTO into blogDTO
-            var blogPost = _mapper.Map<Blog>(blogInsertDTO);
+            Blog blogPost = null;
+
+            // deep clone blogInsertDTO
+            var blogInsertCopy = DeepClone(blogInsertDTO);
+
+            // set CreatedAt, UpdatedAt
+            if (blogInsertCopy != null)
+            {
+                blogInsertCopy.CreatedAt = DateTime.UtcNow;
+                blogInsertCopy.UpdatedAt = DateTime.UtcNow;
+                blogPost = _mapper.Map<Blog>(blogInsertCopy);
+            }
+            else
+            {
+                // convert blogInsertDTO into blogDTO
+                blogPost = _mapper.Map<Blog>(blogInsertDTO);
+            }
 
             // insert into db
             await _blogRepository.Add(blogPost);
@@ -72,6 +88,9 @@ namespace BloggingPlatformAPI.Services
             {
                 // map updated values to blogPost
                 blogPost = _mapper.Map(blogUpdateDTO, blogPost);
+                // set blogPost's UpdatedAt
+                blogPost.UpdatedAt = DateTime.UtcNow;
+
                 // call update method
                 _blogRepository.Update(blogPost);
                 // save changes
@@ -117,6 +136,12 @@ namespace BloggingPlatformAPI.Services
         public bool Validate(BlogUpdateDTO updateDTO)
         {
             throw new NotImplementedException();
+        }
+
+        private T? DeepClone<T>(T obj)
+        {
+            var serialized = JsonSerializer.Serialize(obj);
+            return JsonSerializer.Deserialize<T>(serialized);
         }
     }
 }

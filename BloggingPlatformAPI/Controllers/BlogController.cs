@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BloggingPlatformAPI.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/v1/[controller]")]
     [ApiController]
     public class BlogController : ControllerBase
     {
@@ -24,7 +24,24 @@ namespace BloggingPlatformAPI.Controllers
         }
 
         [HttpGet]
-        public async Task<IEnumerable<BlogDTO>> Get() => await _blogService.Get();
+        public async Task<ActionResult<IEnumerable<BlogDTO>>> Get(int page = 1, int limit = 10)
+        {
+            // validate page and limit (page size)
+            if (page <= 0 || limit <= 0)
+                return BadRequest("Page and Limit must be greater than zero.");
+
+            // get blog posts
+            var blogPosts = await _blogService.Get();
+
+            // pagination using skip and take
+            var paginatedBlogPosts = blogPosts
+                .Skip((page - 1) * limit) // skip items from previous pages
+                .Take(limit)
+                .ToList();
+
+
+            return Ok(paginatedBlogPosts); 
+        }
 
         [HttpGet("{id}")]
         public async Task<ActionResult<BlogDTO>> GetById(int id)
@@ -64,7 +81,7 @@ namespace BloggingPlatformAPI.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult<BlogDTO>> Delete(int id)
         {
-            var blogDTO = _blogService.Delete(id);
+            var blogDTO = await _blogService.Delete(id);
 
             return blogDTO == null ? NotFound() : NoContent();
         }
