@@ -1,19 +1,22 @@
 ﻿using BloggingPlatformAPI.DTOs;
+using BloggingPlatformAPI.Helpers;
 using BloggingPlatformAPI.Services;
 using FluentValidation;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace BloggingPlatformAPI.Controllers
 {
     [Route("api/v1/[controller]")]
     [ApiController]
-    public class BlogController : ControllerBase
+    public class BlogsController : ControllerBase
     {
         IValidator<BlogInsertDTO> _blogInsertValidator;
         IValidator<BlogUpdateDTO> _blogUpdateValidator;
         private ICommonService<BlogDTO, BlogInsertDTO, BlogUpdateDTO> _blogService;
-        public BlogController(
+
+        public BlogsController(
             IValidator<BlogInsertDTO> blogInsertValidator,
             IValidator<BlogUpdateDTO> blogUpdateValidator,
             [FromKeyedServices("blogService")] ICommonService<BlogDTO, BlogInsertDTO, BlogUpdateDTO> blogService)
@@ -23,24 +26,23 @@ namespace BloggingPlatformAPI.Controllers
             _blogService = blogService;
         }
 
+        // GET Blogs
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<BlogDTO>>> Get(int page = 1, int limit = 10)
+        public async Task<ActionResult<IEnumerable<BlogDTO>>> Get([FromQuery] BlogQueryParameters queryParameters)
         {
-            // validate page and limit (page size)
-            if (page <= 0 || limit <= 0)
-                return BadRequest("Page and Limit must be greater than zero.");
-
             // get blog posts
             var blogPosts = await _blogService.Get();
 
-            // pagination using skip and take
-            var paginatedBlogPosts = blogPosts
-                .Skip((page - 1) * limit) // skip items from previous pages
-                .Take(limit)
-                .ToList();
+            // queryable blog posts
+            var queryableBlogPosts = blogPosts.AsQueryable();
 
+            // filters
+            queryableBlogPosts = BlogQueryParameters.FilterBlogPosts(queryableBlogPosts, queryParameters);
 
-            return Ok(paginatedBlogPosts); 
+            // pagination
+            QueryResult.Pagination(queryableBlogPosts, queryParameters);
+
+            return Ok(queryableBlogPosts.AsEnumerable()); 
         }
 
         [HttpGet("{id}")]
