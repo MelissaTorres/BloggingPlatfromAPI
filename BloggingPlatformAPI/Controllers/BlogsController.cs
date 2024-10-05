@@ -39,8 +39,12 @@ namespace BloggingPlatformAPI.Controllers
             // filters
             queryableBlogPosts = BlogQueryParameters.FilterBlogPosts(queryableBlogPosts, queryParameters);
 
+            // sorting
+            if (queryParameters.SortBy.Count() > 0)
+                queryableBlogPosts = BlogQueryParameters.ApplySorting(queryableBlogPosts, queryParameters);
+
             // pagination
-            QueryResult.Pagination(queryableBlogPosts, queryParameters);
+            queryableBlogPosts = BlogQueryParameters.Pagination(queryableBlogPosts, queryParameters);
 
             return Ok(queryableBlogPosts.AsEnumerable()); 
         }

@@ -4,6 +4,7 @@ using BloggingPlatformAPI.Repository;
 using AutoMapper;
 using Microsoft.OpenApi.Validations;
 using System.Text.Json;
+using BloggingPlatformAPI.Helpers;
 
 namespace BloggingPlatformAPI.Services
 {
@@ -52,7 +53,7 @@ namespace BloggingPlatformAPI.Services
             Blog blogPost = null;
 
             // deep clone blogInsertDTO
-            var blogInsertCopy = DeepClone(blogInsertDTO);
+            var blogInsertCopy = Utils.DeepClone(blogInsertDTO);
 
             // set CreatedAt, UpdatedAt
             if (blogInsertCopy != null)
@@ -136,12 +137,6 @@ namespace BloggingPlatformAPI.Services
         public bool Validate(BlogUpdateDTO updateDTO)
         {
             throw new NotImplementedException();
-        }
-
-        private T? DeepClone<T>(T obj)
-        {
-            var serialized = JsonSerializer.Serialize(obj);
-            return JsonSerializer.Deserialize<T>(serialized);
         }
     }
 }
