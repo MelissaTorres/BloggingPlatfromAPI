@@ -33,6 +33,7 @@ namespace BloggingPlatformAPI.Repository
             _context.Entry(blog).State = EntityState.Modified;
         }
 
+
         public void Delete(Blog blog)
         {
             _context.Blogs.Remove(blog);

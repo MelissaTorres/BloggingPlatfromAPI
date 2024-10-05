@@ -1,3 +1,4 @@
+using Asp.Versioning;
 using BloggingPlatformAPI.Automappers;
 using BloggingPlatformAPI.DTOs;
 using BloggingPlatformAPI.Models;
@@ -30,6 +31,18 @@ builder.Services.AddAutoMapper(typeof(MappingProfile));
 
 // Services
 builder.Services.AddKeyedScoped<ICommonService<BlogDTO, BlogInsertDTO, BlogUpdateDTO>, BlogService>("blogService");
+
+// Add versioning
+builder.Services.AddApiVersioning(options =>
+{
+    options.DefaultApiVersion = new ApiVersion(1, 0);
+    options.AssumeDefaultVersionWhenUnspecified = true;
+    options.ReportApiVersions = true;
+}).AddApiExplorer(options =>
+{
+    options.GroupNameFormat = "'v'VVV";
+    options.SubstituteApiVersionInUrl = true;
+});
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

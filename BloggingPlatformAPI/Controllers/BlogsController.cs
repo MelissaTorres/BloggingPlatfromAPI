@@ -1,4 +1,5 @@
-﻿using BloggingPlatformAPI.DTOs;
+﻿using Asp.Versioning;
+using BloggingPlatformAPI.DTOs;
 using BloggingPlatformAPI.Helpers;
 using BloggingPlatformAPI.Services;
 using FluentValidation;
@@ -8,7 +9,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BloggingPlatformAPI.Controllers
 {
-    [Route("api/v1/[controller]")]
+    [ApiVersion("1.0")]
+    [Route("api/v{version:apiVersion}/[controller]")]
     [ApiController]
     public class BlogsController : ControllerBase
     {
@@ -40,11 +42,11 @@ namespace BloggingPlatformAPI.Controllers
             queryableBlogPosts = BlogQueryParameters.FilterBlogPosts(queryableBlogPosts, queryParameters);
 
             // sorting
-            if (queryParameters.SortBy.Count() > 0)
-                queryableBlogPosts = BlogQueryParameters.ApplySorting(queryableBlogPosts, queryParameters);
+            if (queryParameters.SortBy != null)
+                queryableBlogPosts = QueryParameters.ApplySorting(queryableBlogPosts, queryParameters);
 
             // pagination
-            queryableBlogPosts = BlogQueryParameters.Pagination(queryableBlogPosts, queryParameters);
+            queryableBlogPosts = QueryParameters.Pagination(queryableBlogPosts, queryParameters);
 
             return Ok(queryableBlogPosts.AsEnumerable()); 
         }

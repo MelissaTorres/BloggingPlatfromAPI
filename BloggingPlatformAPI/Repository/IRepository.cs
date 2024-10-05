@@ -1,4 +1,7 @@
-﻿namespace BloggingPlatformAPI.Repository
+﻿using Azure;
+using Microsoft.AspNetCore.JsonPatch;
+
+namespace BloggingPlatformAPI.Repository
 {
     public interface IRepository<TEntity>
     {
