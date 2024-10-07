@@ -1,9 +1,12 @@
 ﻿using Asp.Versioning;
 using BloggingPlatformAPI.DTOs;
 using BloggingPlatformAPI.Helpers;
+using BloggingPlatformAPI.Models;
+using BloggingPlatformAPI.Repository;
 using BloggingPlatformAPI.Services;
 using FluentValidation;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -17,15 +20,18 @@ namespace BloggingPlatformAPI.Controllers
         IValidator<BlogInsertDTO> _blogInsertValidator;
         IValidator<BlogUpdateDTO> _blogUpdateValidator;
         private ICommonService<BlogDTO, BlogInsertDTO, BlogUpdateDTO> _blogService;
+        private IRepository<Blog> _blogRepository;
 
         public BlogsController(
             IValidator<BlogInsertDTO> blogInsertValidator,
             IValidator<BlogUpdateDTO> blogUpdateValidator,
-            [FromKeyedServices("blogService")] ICommonService<BlogDTO, BlogInsertDTO, BlogUpdateDTO> blogService)
+            [FromKeyedServices("blogService")] ICommonService<BlogDTO, BlogInsertDTO, BlogUpdateDTO> blogService,
+            IRepository<Blog> blogRepository)
         {
             _blogInsertValidator = blogInsertValidator;
             _blogUpdateValidator = blogUpdateValidator;
             _blogService = blogService;
+            _blogRepository = blogRepository;
         }
 
         // GET Blogs
@@ -48,7 +54,7 @@ namespace BloggingPlatformAPI.Controllers
             // pagination
             queryableBlogPosts = QueryParameters.Pagination(queryableBlogPosts, queryParameters);
 
-            return Ok(queryableBlogPosts.AsEnumerable()); 
+            return Ok(queryableBlogPosts.AsEnumerable());
         }
 
         [HttpGet("{id}")]
@@ -84,6 +90,12 @@ namespace BloggingPlatformAPI.Controllers
             var blogDTO = await _blogService.Update(id, blogUpdateDTO);
 
             return blogDTO == null ? NotFound() : Ok(blogDTO);
+        }
+
+        [HttpPatch("{id}")]
+        public async Task<ActionResult<BlogDTO>> Patch(int id, JsonPatchDocument<Blog> patchDocument)
+        {
+            throw new NotImplementedException();
         }
 
         [HttpDelete("{id}")]

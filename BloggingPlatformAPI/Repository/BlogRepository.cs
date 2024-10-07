@@ -1,4 +1,6 @@
-﻿using BloggingPlatformAPI.Models;
+﻿using Azure;
+using BloggingPlatformAPI.Models;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.EntityFrameworkCore;
 
 namespace BloggingPlatformAPI.Repository
@@ -32,7 +34,6 @@ namespace BloggingPlatformAPI.Repository
             _context.Blogs.Attach(blog);
             _context.Entry(blog).State = EntityState.Modified;
         }
-
 
         public void Delete(Blog blog)
         {

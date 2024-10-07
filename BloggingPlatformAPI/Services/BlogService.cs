@@ -7,6 +7,7 @@ using System.Text.Json;
 using BloggingPlatformAPI.Helpers;
 using Azure;
 using Microsoft.AspNetCore.JsonPatch;
+using Microsoft.AspNetCore.Mvc;
 
 namespace BloggingPlatformAPI.Services
 {
@@ -105,11 +106,6 @@ namespace BloggingPlatformAPI.Services
                 return blogDTO;
             }
 
-            return null;
-        }
-
-        public async Task<BlogDTO> Patch(int id, JsonPatchDocument<BlogDTO> jsonPatchDocument)
-        {
             return null;
         }
 
