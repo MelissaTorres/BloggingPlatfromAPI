@@ -1,7 +1,4 @@
-﻿using Azure;
-using Microsoft.AspNetCore.JsonPatch;
-
-namespace BloggingPlatformAPI.Services
+﻿namespace BloggingPlatformAPI.Services
 {
     public interface ICommonService<T, TI, TU>
     {
