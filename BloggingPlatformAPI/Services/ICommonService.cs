@@ -10,6 +10,7 @@ namespace BloggingPlatformAPI.Services
         Task<T> GetById(int id);
         Task<T> Add(TI insertDTO);
         Task<T> Update(int id, TU updateDTO);
+        Task<T> Patch(int id, TU updateDTO);
         Task<T> Delete(int id);
         bool Validate(TI insertDTO);
         bool Validate(TU updateDTO);

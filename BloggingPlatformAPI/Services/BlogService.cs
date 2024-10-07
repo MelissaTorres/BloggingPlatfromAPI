@@ -109,6 +109,35 @@ namespace BloggingPlatformAPI.Services
             return null;
         }
 
+        public async Task<BlogDTO> Patch(int id, BlogUpdateDTO blogUpdateDTO)
+        {
+            // find blog
+            var blogPost = await _blogRepository.GetById(id);
+
+            // if it's not null
+            if (blogPost != null)
+            {
+                blogPost.Title = blogUpdateDTO.Title != null ? blogUpdateDTO.Title : blogPost.Title;
+                blogPost.Content = blogUpdateDTO.Content != null ? blogUpdateDTO.Content : blogPost.Content;
+                blogPost.Category = blogUpdateDTO.Category != null ? blogUpdateDTO.Category : blogPost.Category;
+                blogPost.Tags = blogUpdateDTO.Tags != null ? blogUpdateDTO.Tags : blogPost.Tags;
+
+                // set updated at
+                blogPost.UpdatedAt = DateTime.UtcNow;
+
+                // call update and save methods
+                _blogRepository.Update(blogPost);
+                await _blogRepository.Save();
+
+                // map blogPost to blogDTO, return it
+                var blogDTO = _mapper.Map<BlogDTO>(blogPost);
+
+                return blogDTO;
+            }
+
+            return null;
+        }
+            
 
         public async Task<BlogDTO> Delete(int id)
         {

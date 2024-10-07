@@ -19,19 +19,19 @@ namespace BloggingPlatformAPI.Controllers
     {
         IValidator<BlogInsertDTO> _blogInsertValidator;
         IValidator<BlogUpdateDTO> _blogUpdateValidator;
+        IValidator<BlogUpdateDTO> _blogPatchValidator;
         private ICommonService<BlogDTO, BlogInsertDTO, BlogUpdateDTO> _blogService;
-        private IRepository<Blog> _blogRepository;
 
         public BlogsController(
             IValidator<BlogInsertDTO> blogInsertValidator,
             IValidator<BlogUpdateDTO> blogUpdateValidator,
-            [FromKeyedServices("blogService")] ICommonService<BlogDTO, BlogInsertDTO, BlogUpdateDTO> blogService,
-            IRepository<Blog> blogRepository)
+            IValidator<BlogUpdateDTO> blogPatchValidator,
+            [FromKeyedServices("blogService")] ICommonService<BlogDTO, BlogInsertDTO, BlogUpdateDTO> blogService)
         {
             _blogInsertValidator = blogInsertValidator;
             _blogUpdateValidator = blogUpdateValidator;
+            _blogPatchValidator = blogPatchValidator;
             _blogService = blogService;
-            _blogRepository = blogRepository;
         }
 
         // GET Blogs
@@ -93,10 +93,19 @@ namespace BloggingPlatformAPI.Controllers
         }
 
         [HttpPatch("{id}")]
-        public async Task<ActionResult<BlogDTO>> Patch(int id, JsonPatchDocument<Blog> patchDocument)
+        public async Task<ActionResult<BlogDTO>> Patch(int id, BlogUpdateDTO blogPatchDTO)
         {
-            throw new NotImplementedException();
+            // validate patch
+            var validationResult = await _blogPatchValidator.ValidateAsync(blogPatchDTO);
+
+            if (!validationResult.IsValid)
+                return BadRequest(validationResult.Errors);
+
+            var blogDTO = await _blogService.Patch(id, blogPatchDTO);
+
+            return blogDTO == null? NotFound() : Ok(blogDTO);
         }
+
 
         [HttpDelete("{id}")]
         public async Task<ActionResult<BlogDTO>> Delete(int id)

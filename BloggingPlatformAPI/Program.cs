@@ -27,6 +27,7 @@ builder.Services.AddDbContext<BlogContext>(options =>
 // Validators
 builder.Services.AddScoped<IValidator<BlogInsertDTO>, BlogInsertValidator>();
 builder.Services.AddScoped<IValidator<BlogUpdateDTO>, BlogUpdateValidator>();
+builder.Services.AddScoped<IValidator<BlogUpdateDTO>, BlogPatchValidator>();
 
 // Automappers
 builder.Services.AddAutoMapper(typeof(MappingProfile));
@@ -46,13 +47,10 @@ builder.Services.AddApiVersioning(options =>
     options.SubstituteApiVersionInUrl = true;
 });
 
-builder.Services.AddControllers().AddNewtonsoftJson();
+builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen(c =>
-{
-    c.SwaggerDoc("v1", new OpenApiInfo { Title = "BloggingPlatform", Version = "v1" });
-}).AddSwaggerGenNewtonsoftSupport();
+builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 

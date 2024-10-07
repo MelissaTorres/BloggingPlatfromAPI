@@ -66,14 +66,6 @@
               "target": "Package",
               "version": "[11.10.0, )"
             },
-            "Microsoft.AspNetCore.JsonPatch": {
-              "target": "Package",
-              "version": "[8.0.8, )"
-            },
-            "Microsoft.AspNetCore.Mvc.NewtonsoftJson": {
-              "target": "Package",
-              "version": "[8.0.8, )"
-            },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
               "version": "[8.0.8, )"
@@ -91,10 +83,6 @@
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[6.4.0, )"
-            },
-            "Swashbuckle.AspNetCore.Newtonsoft": {
-              "target": "Package",
-              "version": "[6.8.1, )"
             }
           },
           "imports": [
