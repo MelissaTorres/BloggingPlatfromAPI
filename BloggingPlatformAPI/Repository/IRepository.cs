@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.JsonPatch;
-
-namespace BloggingPlatformAPI.Repository
+﻿namespace BloggingPlatformAPI.Repository
 {
     public interface IRepository<TEntity>
     {

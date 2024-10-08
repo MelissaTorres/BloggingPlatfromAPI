@@ -139,8 +139,3 @@ C:\Users\melis\source\repos\BloggingPlatformAPI\BloggingPlatformAPI\bin\Debug\ne
 C:\Users\melis\source\repos\BloggingPlatformAPI\BloggingPlatformAPI\bin\Debug\net8.0\Asp.Versioning.Http.dll
 C:\Users\melis\source\repos\BloggingPlatformAPI\BloggingPlatformAPI\bin\Debug\net8.0\Asp.Versioning.Mvc.dll
 C:\Users\melis\source\repos\BloggingPlatformAPI\BloggingPlatformAPI\bin\Debug\net8.0\Asp.Versioning.Mvc.ApiExplorer.dll
-C:\Users\melis\source\repos\BloggingPlatformAPI\BloggingPlatformAPI\bin\Debug\net8.0\Microsoft.AspNetCore.JsonPatch.dll
-C:\Users\melis\source\repos\BloggingPlatformAPI\BloggingPlatformAPI\bin\Debug\net8.0\Newtonsoft.Json.dll
-C:\Users\melis\source\repos\BloggingPlatformAPI\BloggingPlatformAPI\bin\Debug\net8.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
-C:\Users\melis\source\repos\BloggingPlatformAPI\BloggingPlatformAPI\bin\Debug\net8.0\Newtonsoft.Json.Bson.dll
-C:\Users\melis\source\repos\BloggingPlatformAPI\BloggingPlatformAPI\bin\Debug\net8.0\Swashbuckle.AspNetCore.Newtonsoft.dll

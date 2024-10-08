@@ -1,6 +1,5 @@
 ﻿using Azure;
 using BloggingPlatformAPI.Models;
-using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.EntityFrameworkCore;
 
 namespace BloggingPlatformAPI.Repository

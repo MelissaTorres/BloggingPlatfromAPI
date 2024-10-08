@@ -6,7 +6,6 @@ using Microsoft.OpenApi.Validations;
 using System.Text.Json;
 using BloggingPlatformAPI.Helpers;
 using Azure;
-using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BloggingPlatformAPI.Services
