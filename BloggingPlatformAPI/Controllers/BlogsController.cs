@@ -1,13 +1,9 @@
 ﻿using Asp.Versioning;
 using BloggingPlatformAPI.DTOs;
 using BloggingPlatformAPI.Helpers;
-using BloggingPlatformAPI.Models;
-using BloggingPlatformAPI.Repository;
 using BloggingPlatformAPI.Services;
 using FluentValidation;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace BloggingPlatformAPI.Controllers
 {
