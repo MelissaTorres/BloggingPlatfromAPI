@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BloggingPlatformAPI.Models
 {
-    public class UserContext : IdentityDbContext<User>
+    public class ApplicationDbContext : IdentityDbContext<User>
     {
-        public UserContext(DbContextOptions<UserContext> options) : base(options) { }
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

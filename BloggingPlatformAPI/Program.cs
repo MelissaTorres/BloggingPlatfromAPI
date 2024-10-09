@@ -7,11 +7,15 @@ using BloggingPlatformAPI.Repository;
 using BloggingPlatformAPI.Services;
 using BloggingPlatformAPI.Validators;
 using FluentValidation;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 
 var builder = WebApplication.CreateBuilder(args);
+var jwtSettings = builder.Configuration.GetSection("JwtSettings");
 var _myCors = "AllowSpecificOrigins";
 
 // Add services to the container.
@@ -19,12 +23,12 @@ var _myCors = "AllowSpecificOrigins";
 builder.Services.AddScoped<IRepository<Blog>, BlogRepository>();
 
 // Entity Framework
-builder.Services.AddDbContext<UserContext>(options => 
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("BlogConnection"));
 });
 
-builder.Services.AddDbContext<BlogContext>(options => 
+builder.Services.AddDbContext<BlogContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("BlogConnection"));
 });
@@ -46,7 +50,7 @@ builder.Services.AddApiVersioning(options =>
     options.DefaultApiVersion = new ApiVersion(1, 0);
     options.AssumeDefaultVersionWhenUnspecified = true;
     options.ReportApiVersions = true;
-    options.ApiVersionReader = ApiVersionReader.Combine( 
+    options.ApiVersionReader = ApiVersionReader.Combine(
         new HeaderApiVersionReader("X-API-Version"),
         new MediaTypeApiVersionReader("ver"));
 }).AddApiExplorer(options =>
@@ -60,20 +64,41 @@ builder.Services.AddHsts(options =>
     options.MaxAge = TimeSpan.FromDays(365);
 });
 
-builder.Services.AddAuthorization();
-
-builder.Services.AddAuthentication()
-    .AddBearerToken(IdentityConstants.BearerScheme);
-
-builder.Services.AddIdentityCore<User>()
-    .AddEntityFrameworkStores<UserContext>()
+builder.Services.AddIdentityApiEndpoints<User>()
+    .AddEntityFrameworkStores<ApplicationDbContext>()
     .AddApiEndpoints();
 
+// Configure JWT Bearer Authentication
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme =
+    options.DefaultChallengeScheme =
+    options.DefaultForbidScheme =
+    options.DefaultScheme =
+    options.DefaultSignInScheme =
+    options.DefaultSignOutScheme = JwtBearerDefaults.AuthenticationScheme;
+}).AddJwtBearer(options =>
+    {
+        //options.SaveToken = true;
+        options.TokenValidationParameters = new TokenValidationParameters()
+        {
+            ValidateIssuer = true,
+            ValidIssuer = jwtSettings["Issuer"],
+            ValidateAudience = true,
+            ValidAudience = jwtSettings["Audience"],
+            ValidateIssuerSigningKey = true,
+            IssuerSigningKey = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(jwtSettings["SecretKey"]))
+        };
+    });
+
+builder.Services.AddAuthorization();
+
+
 // cors
-builder.Services.AddCors(options => 
+builder.Services.AddCors(options =>
 {
     // this works with localhost - dev env only
-    options.AddPolicy(name : _myCors,
+    options.AddPolicy(name: _myCors,
         builder =>
         {
             builder.AllowAnyOrigin()
@@ -105,7 +130,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
     app.ApplyMigrations();
 }
-else 
+else
 {
     app.UseHsts();
 }
@@ -114,11 +139,11 @@ app.UseHttpsRedirection();
 
 app.MapIdentityApi<User>();
 
-app.UseCors(_myCors);
+app.UseAuthentication();
 
 app.UseAuthorization();
 
-app.UseAuthentication();
+app.UseCors(_myCors);
 
 app.MapControllers();
 

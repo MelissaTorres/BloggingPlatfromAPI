@@ -154,3 +154,4 @@ C:\Users\melis\source\repos\BloggingPlatformAPI\BloggingPlatformAPI\obj\Debug\ne
 C:\Users\melis\source\repos\BloggingPlatformAPI\BloggingPlatformAPI\obj\Debug\net8.0\BloggingPlatformAPI.pdb
 C:\Users\melis\source\repos\BloggingPlatformAPI\BloggingPlatformAPI\obj\Debug\net8.0\BloggingPlatformAPI.genruntimeconfig.cache
 C:\Users\melis\source\repos\BloggingPlatformAPI\BloggingPlatformAPI\obj\Debug\net8.0\ref\BloggingPlatformAPI.dll
+C:\Users\melis\source\repos\BloggingPlatformAPI\BloggingPlatformAPI\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll

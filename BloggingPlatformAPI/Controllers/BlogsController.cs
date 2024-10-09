@@ -3,6 +3,8 @@ using BloggingPlatformAPI.DTOs;
 using BloggingPlatformAPI.Helpers;
 using BloggingPlatformAPI.Services;
 using FluentValidation;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BloggingPlatformAPI.Controllers
