@@ -8,7 +8,9 @@ using BloggingPlatformAPI.Validators;
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 
+
 var builder = WebApplication.CreateBuilder(args);
+var _myCors = "AllowSpecificOrigins";
 
 // Add services to the container.
 // Repository
@@ -55,13 +57,23 @@ builder.Services.AddHsts(options =>
 // cors
 builder.Services.AddCors(options => 
 {
-    options.AddDefaultPolicy(builder => 
-    {
-        builder.WithOrigins(
-            "https://localhost:7200",
-            "http://localhost:5163")
-        .WithHeaders("X-API-Version");
-    });
+    // this works with localhost - dev env only
+    options.AddPolicy(name : _myCors,
+        builder =>
+        {
+            builder.AllowAnyOrigin()
+                   .AllowAnyHeader()
+                   .AllowAnyMethod();
+        });
+
+    // prod version
+    //options.AddDefaultPolicy(builder =>
+    //{
+    //    builder.WithOrigins("www.example.com")
+    //    .WithHeaders("X-API-Version")
+    //    //.AllowAnyHeader()
+    //    .AllowAnyMethod();
+    //});
 });
 
 builder.Services.AddControllers();
@@ -84,7 +96,7 @@ else
 
 app.UseHttpsRedirection();
 
-app.UseCors();
+app.UseCors(_myCors);
 
 app.UseAuthorization();
 
