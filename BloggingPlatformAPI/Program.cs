@@ -1,11 +1,13 @@
 using Asp.Versioning;
 using BloggingPlatformAPI.Automappers;
 using BloggingPlatformAPI.DTOs;
+using BloggingPlatformAPI.Helpers;
 using BloggingPlatformAPI.Models;
 using BloggingPlatformAPI.Repository;
 using BloggingPlatformAPI.Services;
 using BloggingPlatformAPI.Validators;
 using FluentValidation;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 
@@ -17,6 +19,10 @@ var _myCors = "AllowSpecificOrigins";
 builder.Services.AddScoped<IRepository<Blog>, BlogRepository>();
 
 // Entity Framework
+builder.Services.AddDbContext<UserContext>(options => 
+{
+    options.UseSqlServer(builder.Configuration.GetConnectionString("BlogConnection"));
+});
 
 builder.Services.AddDbContext<BlogContext>(options => 
 {
@@ -54,6 +60,15 @@ builder.Services.AddHsts(options =>
     options.MaxAge = TimeSpan.FromDays(365);
 });
 
+builder.Services.AddAuthorization();
+
+builder.Services.AddAuthentication()
+    .AddBearerToken(IdentityConstants.BearerScheme);
+
+builder.Services.AddIdentityCore<User>()
+    .AddEntityFrameworkStores<UserContext>()
+    .AddApiEndpoints();
+
 // cors
 builder.Services.AddCors(options => 
 {
@@ -88,6 +103,7 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+    app.ApplyMigrations();
 }
 else 
 {
@@ -96,9 +112,13 @@ else
 
 app.UseHttpsRedirection();
 
+app.MapIdentityApi<User>();
+
 app.UseCors(_myCors);
 
 app.UseAuthorization();
+
+app.UseAuthentication();
 
 app.MapControllers();
 
